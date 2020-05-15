@@ -13,6 +13,7 @@
 
 runtime: nodejs
 env: flex
+service: Quran-API
 
 # [START configuration]
 endpoints_api_service:

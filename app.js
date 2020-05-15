@@ -1,44 +1,40 @@
-// Copyright 2017 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// [START app]
-'use strict';
-
-// [START setup]
 const express = require('express');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 const app = express();
 
 app.set('case sensitive routing', true);
 app.use(bodyParser.json());
-// [END setup]
 
-app.get('/echo', (req, res) => {
-  res.status(200).json({message: "Some message"}).end();
+app.use(morgan('dev'));
+
+const audioRoutes = require('./api/audio');
+
+app.use('/audio', audioRoutes);
+
+app.use((req, res, next) => {
+  const error = new Error("Not found");
+  error.status = 404;
+  next(error);
 });
+
+app.use((error, req, res, next) => {
+  res.status(error.status || 500);
+  res.json({
+    error: {
+      message: error.message
+    }
+  })
+})
 
 
 if (module === require.main) {
-  // [START listen]
   const PORT = process.env.PORT || 8080;
   app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
     console.log('Press Ctrl+C to quit.');
   });
-  // [END listen]
 }
-// [END app]
 
 module.exports = app;
