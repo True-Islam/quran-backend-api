@@ -1,9 +1,3 @@
-id = IDField();
-ayah_id = TextField();
-ayah_number = NumberField();
-edition_id = TextField();
-text = TextField();
-
 class Translation {
   constructor() {
     this.id;
@@ -32,4 +26,16 @@ class Translation {
   }
 }
 
-module.exports = Translation;
+Translation.collection = "translations";
+
+const translationConverter = {
+  toFirestore(translation) {
+    return ayah.toJson();
+  },
+  fromFirestore(data) {
+    return Translation.fromJson(data);
+  },
+};
+
+module.exports.Translation = Translation;
+module.exports.translationConverter = translationConverter;

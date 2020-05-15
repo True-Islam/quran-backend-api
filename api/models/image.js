@@ -1,5 +1,3 @@
-ayah_id = IDField();
-image = TextField();
 class Image {
   constructor() {
     this.ayahId;
@@ -22,4 +20,16 @@ class Image {
   }
 }
 
-module.exports = image;
+Image.collection = "images";
+
+const imageConverter = {
+  toFirestore(image) {
+    return image.toJson();
+  },
+  fromFirestore(data) {
+    return Image.fromJson(data);
+  },
+};
+
+module.exports.Image = Image;
+module.exports.imageConverter = imageConverter;

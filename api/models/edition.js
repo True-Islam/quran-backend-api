@@ -8,7 +8,7 @@ class Edition {
     this.direction;
   }
 
-  static fromJson(id, data) {
+  static fromJson(data, id = null) {
     const ayah = new ayah();
     ayah.id = id;
     ayah.language = data.language;
@@ -30,3 +30,17 @@ class Edition {
     };
   }
 }
+
+Edition.collection = "editions";
+
+const editionConverter = {
+  toFirestore(edition) {
+    return edition.toJson();
+  },
+  fromFirestore(data) {
+    return Edition.fromJson(data);
+  },
+};
+
+module.exports.Edition = Edition;
+module.exports.editionConverter = editionConverter;

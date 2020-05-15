@@ -1,17 +1,17 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
+const express = require("express");
+const bodyParser = require("body-parser");
+const morgan = require("morgan");
 
 const app = express();
 
-app.set('case sensitive routing', true);
+app.set("case sensitive routing", true);
 app.use(bodyParser.json());
 
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 
-const audioRoutes = require('./api/audio');
+const audioRoutes = require("./api/routes/audio");
 
-app.use('/audio', audioRoutes);
+app.use("/v1/audio", audioRoutes);
 
 app.use((req, res, next) => {
   const error = new Error("Not found");
@@ -23,17 +23,16 @@ app.use((error, req, res, next) => {
   res.status(error.status || 500);
   res.json({
     error: {
-      message: error.message
-    }
-  })
-})
-
+      message: error.message,
+    },
+  });
+});
 
 if (module === require.main) {
-  const PORT = process.env.PORT || 8080;
+  const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
-    console.log('Press Ctrl+C to quit.');
+    console.log("Press Ctrl+C to quit.");
   });
 }
 

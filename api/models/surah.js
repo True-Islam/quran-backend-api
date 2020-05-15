@@ -1,11 +1,3 @@
-id = IDField();
-number = NumberField((int_only = True));
-name = TextField((format = "title"));
-english_name = TextField((format = "title"));
-english_name_translation = TextField((format = "title"));
-number_of_ayahs = NumberField((int_only = True));
-revelation_type = TextField((format = "capitalize"));
-
 class Surah {
   constructor() {
     this.id;
@@ -17,7 +9,7 @@ class Surah {
     this.revelationType;
   }
 
-  static fromJson(id, data) {
+  static fromJson(data, id = null) {
     const surah = new Surah();
     surah.id = id;
     surah.number = data.number;
@@ -40,4 +32,16 @@ class Surah {
   }
 }
 
-module.exports = Surah;
+Surah.collection = "surahs";
+
+const surahConverter = {
+  toFirestore(surah) {
+    return surah.toJson();
+  },
+  fromFirestore(data) {
+    return Surah.fromJson(data);
+  },
+};
+
+module.exports.Surah = Surah;
+module.exports.surahConverter = surahConverter;
