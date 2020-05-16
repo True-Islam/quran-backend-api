@@ -26,8 +26,8 @@ class Ayah {
     ayah.arabic = data.arabic;
   }
 
-  toJson() {
-    return {
+  toJson(withId = false) {
+    const jsonData = {
       surahId: this.surahId,
       number: this.number,
       numberInSurah: this.numberInSurah,
@@ -38,6 +38,12 @@ class Ayah {
       sajda: this.sajda,
       arabic: this.arabic,
     };
+
+    if (withId) {
+      jsonData["id"] = this.id;
+    }
+
+    return jsonData;
   }
 }
 

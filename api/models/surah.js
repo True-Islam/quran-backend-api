@@ -20,8 +20,8 @@ class Surah {
     surah.revelationType = data.revelationType;
   }
 
-  toJson() {
-    return {
+  toJson(withId = false) {
+    const jsonData = {
       number: this.number,
       name: this.name,
       englishName: this.englishName,
@@ -29,6 +29,12 @@ class Surah {
       numberOfAyahs: this.numberOfAyahs,
       revelationType: this.revelationType,
     };
+
+    if (withId) {
+      jsonData["id"] = this.id;
+    }
+
+    return jsonData;
   }
 }
 

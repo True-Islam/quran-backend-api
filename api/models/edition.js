@@ -9,25 +9,31 @@ class Edition {
   }
 
   static fromJson(data, id = null) {
-    const ayah = new ayah();
-    ayah.id = id;
-    ayah.language = data.language;
-    ayah.translator = data.translator;
-    ayah.type = data.type;
-    ayah.format = data.format;
-    ayah.direction = data.direction;
+    const edition = new Edition();
+    edition.id = id;
+    edition.language = data.language;
+    edition.translator = data.translator;
+    edition.type = data.type;
+    edition.format = data.format;
+    edition.direction = data.direction;
 
-    return ayah;
+    return edition;
   }
 
-  toJson() {
-    return {
+  toJson(withId = false) {
+    const jsonData = {
       language: this.language,
       translator: this.translator,
       type: this.type,
       format: this.format,
       direction: this.direction,
     };
+
+    if (withId) {
+      jsonData["id"] = this.id;
+    }
+
+    return jsonData;
   }
 }
 

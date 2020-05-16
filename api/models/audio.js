@@ -20,14 +20,20 @@ class Audio {
     return audio;
   }
 
-  toJson() {
-    return {
+  toJson(withId = false) {
+    const jsonData = {
       ayahId: this.ayahId,
       ayahNumber: this.ayahNumber,
       editionId: this.editionId,
       type: this.type,
       link: this.link,
     };
+
+    if (withId) {
+      jsonData["id"] = this.id;
+    }
+
+    return jsonData;
   }
 }
 

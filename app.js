@@ -10,8 +10,12 @@ app.use(bodyParser.json());
 app.use(morgan("dev"));
 
 const audioRoutes = require("./api/routes/audio");
+const editionRoutes = require("./api/routes/edition");
+const imageRoutes = require("./api/routes/image");
 
 app.use("/v1/audio", audioRoutes);
+app.use("/v1/edition", editionRoutes);
+app.use("/v1/image", imageRoutes);
 
 app.use((req, res, next) => {
   const error = new Error("Not found");
@@ -22,6 +26,7 @@ app.use((req, res, next) => {
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
   res.json({
+    code: error.status || 500,
     error: {
       message: error.message,
     },

@@ -16,13 +16,19 @@ class Translation {
     translation.text = data.text;
   }
 
-  toJson() {
-    return {
+  toJson(withId = false) {
+    const jsonData = {
       ayahId: this.ayahId,
       ayahNumber: this.ayahNumber,
       editionId: this.editionId,
       text: this.text,
     };
+
+    if (withId) {
+      jsonData["id"] = this.id;
+    }
+
+    return jsonData;
   }
 }
 
