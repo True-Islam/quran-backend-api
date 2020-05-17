@@ -12,10 +12,14 @@ app.use(morgan("dev"));
 const audioRoutes = require("./api/routes/audio");
 const editionRoutes = require("./api/routes/edition");
 const imageRoutes = require("./api/routes/image");
+const surahRoutes = require("./api/routes/surah");
+const translationRoutes = require("./api/routes/translation");
 
 app.use("/v1/audio", audioRoutes);
 app.use("/v1/edition", editionRoutes);
 app.use("/v1/image", imageRoutes);
+app.use("/v1/surah", surahRoutes);
+app.use("/v1/translation", translationRoutes);
 
 app.use((req, res, next) => {
   const error = new Error("Not found");

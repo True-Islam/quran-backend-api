@@ -18,6 +18,8 @@ class Surah {
     surah.englishNameTranslation = data.englishNameTranslation;
     surah.numberOfAyahs = data.numberOfAyahs;
     surah.revelationType = data.revelationType;
+
+    return surah;
   }
 
   toJson(withId = false) {

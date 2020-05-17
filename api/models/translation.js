@@ -7,13 +7,15 @@ class Translation {
     this.text;
   }
 
-  static fromJson(id, data) {
+  static fromJson(data, id = null) {
     const translation = new Translation();
     translation.id = id;
     translation.ayahId = data.ayahId;
     translation.ayahNumber = data.ayahNumber;
     translation.editionId = data.editionId;
     translation.text = data.text;
+
+    return translation;
   }
 
   toJson(withId = false) {
@@ -36,7 +38,7 @@ Translation.collection = "translations";
 
 const translationConverter = {
   toFirestore(translation) {
-    return ayah.toJson();
+    return translation.toJson();
   },
   fromFirestore(data) {
     return Translation.fromJson(data);
