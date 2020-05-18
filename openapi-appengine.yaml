@@ -1,24 +1,24 @@
 # [START swagger]
 swagger: "2.0"
 info:
-  description: "A simple Google Cloud Endpoints API example."
-  title: "Endpoints Example"
+  description: "API for Quran"
+  title: "Quran API"
   version: "1.0.0"
 host: "utopian-button-227405.appspot.com"
 # [END swagger]
 consumes:
-- "application/json"
+  - "application/json"
 produces:
-- "application/json"
+  - "application/json"
 schemes:
-- "https"
+  - "https"
 paths:
-  "/echo":
+  "/v1/audio":
     get:
       description: "Echo back a given message."
       operationId: "echo"
       produces:
-      - "application/json"
+        - "application/json"
       responses:
         200:
           description: "Echo"
