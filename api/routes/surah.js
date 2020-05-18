@@ -73,27 +73,37 @@ router.get("/type/:type", async (req, res, next) => {
 });
 
 router.get("/:surahId", async (req, res, next) => {
-  const surahSnap = await firestore
-    .collection(Surah.collection)
-    .withConverter(surahConverter)
-    .doc(req.params.surahId)
-    .get();
+  const response = await surahById(req.params.surahId);
 
-  if (surahSnap.exists) {
-    const surah = surahSnap.data();
-    surah.id = surahSnap.id;
-
-    res.status(200).json({
-      code: 200,
-      status: "OK",
-      data: surah.toJson(true),
-    });
+  if (response) {
+    res.status(200).json(response);
   } else {
     const error = new Error(`Document not found with id ${req.params.surahId}`);
     error.status = 404;
     next(error);
   }
 });
+
+const surahById = async (surahId) => {
+  const surahSnap = await firestore
+    .collection(Surah.collection)
+    .withConverter(surahConverter)
+    .doc(surahId)
+    .get();
+
+  if (surahSnap.exists) {
+    const surah = surahSnap.data();
+    surah.id = surahSnap.id;
+
+    return {
+      code: 200,
+      status: "OK",
+      data: surah.toJson(true),
+    };
+  }
+
+  return null;
+};
 
 const generateResponse = async (field, value, limit, offset) => {
   const response = await findSurah(
@@ -157,4 +167,5 @@ const findSurah = async (
   return response;
 };
 
-module.exports = router;
+module.exports.findSurahById = surahById;
+module.exports.surahRoutes = router;

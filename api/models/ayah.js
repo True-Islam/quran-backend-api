@@ -24,6 +24,8 @@ class Ayah {
     ayah.hizbQurater = data.hizbQurater;
     ayah.sajda = data.sajda;
     ayah.arabic = data.arabic;
+
+    return ayah;
   }
 
   toJson(withId = false) {

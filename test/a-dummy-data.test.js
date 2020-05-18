@@ -41,6 +41,22 @@ audio.link = "audio-2 ayah-2 editoin-2 arabic";
 
 firestore.collection(Audio.collection).doc(audio.id).create(audio.toJson());
 
+audio.id = "audio-5";
+audio.ayahId = "ayah-1";
+audio.editionId = "edition-2";
+audio.type = "arabic";
+audio.link = "audio-5 ayah-1 edition-2 arabic";
+
+firestore.collection(Audio.collection).doc(audio.id).create(audio.toJson());
+
+audio.id = "audio-6";
+audio.ayahId = "ayah-1";
+audio.editionId = "edition-2";
+audio.type = "translation";
+audio.link = "audio-6 ayah-1 edition-2 translation";
+
+firestore.collection(Audio.collection).doc(audio.id).create(audio.toJson());
+
 // Save Data for edition
 const edition = new Edition();
 edition.id = "edition-1";
@@ -211,3 +227,48 @@ firestore
   .collection(Translation.collection)
   .doc(trans.id)
   .create(trans.toJson());
+
+// Save Ayah Data
+const ayah = new Ayah();
+ayah.id = "ayah-1";
+ayah.surahId = "surah-1";
+ayah.number = 1;
+ayah.numberInSurah = 1;
+ayah.juz = 1;
+ayah.manzil = 1;
+ayah.ruku = 1;
+ayah.hizbQurater = 1;
+ayah.sajda = false;
+ayah.arabic = "arabic of ayah 1";
+
+firestore.collection(Ayah.collection).doc(ayah.id).create(ayah.toJson());
+
+ayah.id = "ayah-2";
+ayah.surahId = "surah-1";
+ayah.sajda = true;
+ayah.arabic = "arabic of ayah 2";
+
+firestore.collection(Ayah.collection).doc(ayah.id).create(ayah.toJson());
+
+ayah.id = "ayah-3";
+ayah.surahId = "surah-2";
+ayah.sajda = true;
+ayah.arabic = "arabic of ayah 2";
+
+firestore.collection(Ayah.collection).doc(ayah.id).create(ayah.toJson());
+
+ayah.id = "ayah-4";
+ayah.juz = 1;
+ayah.surahId = "surah-1";
+ayah.sajda = false;
+ayah.arabic = "arabic of ayah 2";
+
+firestore.collection(Ayah.collection).doc(ayah.id).create(ayah.toJson());
+
+ayah.id = "ayah-5";
+ayah.juz = 1;
+ayah.surahId = "surah-1";
+ayah.sajda = true;
+ayah.arabic = "arabic of ayah 2";
+
+firestore.collection(Ayah.collection).doc(ayah.id).create(ayah.toJson());

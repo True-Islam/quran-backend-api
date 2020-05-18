@@ -51,21 +51,10 @@ router.get("/type/:type", async (req, res, next) => {
 });
 
 router.get("/:editionId", async (req, res, next) => {
-  const editionSnap = await firestore
-    .collection(Edition.collection)
-    .withConverter(editionConverter)
-    .doc(req.params.editionId)
-    .get();
+  const response = await editionById(req.params.editionId);
 
-  if (editionSnap.exists) {
-    const edition = editionSnap.data();
-    edition.id = editionSnap.id;
-
-    res.status(200).json({
-      code: 200,
-      status: "OK",
-      data: edition.toJson(true),
-    });
+  if (response) {
+    res.status(200).json(response);
   } else {
     const error = new Error(
       `Document not found with id ${req.params.editionId}`
@@ -74,6 +63,27 @@ router.get("/:editionId", async (req, res, next) => {
     next(error);
   }
 });
+
+const editionById = async (editionId) => {
+  const editionSnap = await firestore
+    .collection(Edition.collection)
+    .withConverter(editionConverter)
+    .doc(editionId)
+    .get();
+
+  if (editionSnap.exists) {
+    const edition = editionSnap.data();
+    edition.id = editionSnap.id;
+
+    return {
+      code: 200,
+      status: "OK",
+      data: edition.toJson(true),
+    };
+  }
+
+  return null;
+};
 
 const generateResponse = async (field, value, limit, offset) => {
   const response = await findEdition(
@@ -137,4 +147,5 @@ const findEdition = async (
   return response;
 };
 
-module.exports = router;
+module.exports.findEditionById = editionById;
+module.exports.editionRoutes = router;

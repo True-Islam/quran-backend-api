@@ -179,4 +179,5 @@ const findAudio = async (field, value, limit = null, offset = null) => {
   return response;
 };
 
-module.exports = router;
+module.exports.filterAudio = filterAudio;
+module.exports.audioRoutes = router;

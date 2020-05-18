@@ -156,4 +156,5 @@ const findTranslation = async (
   return response;
 };
 
-module.exports = router;
+module.exports.filterTranslation = filterTranslation;
+module.exports.translationRoutes = router;
