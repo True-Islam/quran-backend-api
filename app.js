@@ -40,7 +40,7 @@ app.use((error, req, res, next) => {
 });
 
 if (module === require.main) {
-  const PORT = process.env.PORT || 8080;
+  const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
     console.log("Press Ctrl+C to quit.");

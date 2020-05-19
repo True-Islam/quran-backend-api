@@ -15,8 +15,8 @@ schemes:
 paths:
   "/v1/audio":
     get:
-      description: "Echo back a given message."
-      operationId: "echo"
+      description: "Get Audio by Id"
+      operationId: "audio"
       produces:
         - "application/json"
       responses:

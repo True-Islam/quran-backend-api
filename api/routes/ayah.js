@@ -24,6 +24,105 @@ router.get("/surah/:surahId", async (req, res, next) => {
   res.status(200).json(response);
 });
 
+router.get("/number/:number", async (req, res, next) => {
+  const response = await generateResponse(
+    "number",
+    parseInt(req.params.number),
+    req.query.limit,
+    req.query.offset,
+    req.query.parts,
+    req.query.edition
+  );
+
+  res.status(200).json({
+    code: response.code,
+    status: response.status,
+    data: response.data[0],
+  });
+});
+
+router.get("/number_in_surah/:number", async (req, res, next) => {
+  const response = await generateResponse(
+    "numberInSurah",
+    parseInt(req.params.number),
+    req.query.limit,
+    req.query.offset,
+    req.query.parts,
+    req.query.edition
+  );
+
+  res.status(200).json({
+    code: response.code,
+    status: response.status,
+    data: response.data[0],
+  });
+});
+
+router.get("/juz/:juz", async (req, res, next) => {
+  const response = await generateResponse(
+    "juz",
+    parseInt(req.params.juz),
+    req.query.limit,
+    req.query.offset,
+    req.query.parts,
+    req.query.edition
+  );
+
+  res.status(200).json(response);
+});
+
+router.get("/manzil/:manzil", async (req, res, next) => {
+  const response = await generateResponse(
+    "manzil",
+    parseInt(req.params.manzil),
+    req.query.limit,
+    req.query.offset,
+    req.query.parts,
+    req.query.edition
+  );
+
+  res.status(200).json(response);
+});
+
+router.get("/ruku/:ruku", async (req, res, next) => {
+  const response = await generateResponse(
+    "ruku",
+    parseInt(req.params.ruku),
+    req.query.limit,
+    req.query.offset,
+    req.query.parts,
+    req.query.edition
+  );
+
+  res.status(200).json(response);
+});
+
+router.get("/hizb_qurater/:hizbQuarter", async (req, res, next) => {
+  const response = await generateResponse(
+    "hizbQuarter",
+    parseInt(req.params.hizbQuarter),
+    req.query.limit,
+    req.query.offset,
+    req.query.parts,
+    req.query.edition
+  );
+
+  res.status(200).json(response);
+});
+
+router.get("/sajda/:sajda", async (req, res, next) => {
+  const response = await generateResponse(
+    "sajda",
+    req.params.sajda.toLowerCase() == "true" ? true : false,
+    req.query.limit,
+    req.query.offset,
+    req.query.parts,
+    req.query.edition
+  );
+
+  res.status(200).json(response);
+});
+
 router.get("/:ayahId", async (req, res, next) => {
   const ayahSnap = await firestore
     .collection(Ayah.collection)
@@ -64,6 +163,10 @@ const getAdditionalParts = async (ayah, parts, edition) => {
 
   if (!parts) {
     return response;
+  }
+
+  if (parts.toLowerCase() == "all") {
+    parts = "translation,surah,edition,arabic_audio,translation_audio,image";
   }
 
   const partList = parts.toLowerCase().split(",");
@@ -163,7 +266,7 @@ const findAyah = async (
   const ayahList = [];
   let ref = firestore.collection(Ayah.collection).withConverter(ayahConverter);
 
-  if (field && value) {
+  if (field != null && value != null) {
     ref = ref.where(field, "==", value);
   }
 

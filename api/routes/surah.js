@@ -20,12 +20,16 @@ router.get("/all", async (req, res, next) => {
 router.get("/number/:number", async (req, res, next) => {
   const response = await generateResponse(
     "number",
-    req.params.number,
+    parseInt(req.params.number),
     req.query.limit,
     req.query.offset
   );
 
-  res.status(200).json(response);
+  res.status(200).json({
+    code: response.code,
+    status: response.status,
+    data: response.data[0],
+  });
 });
 
 router.get("/name/:name", async (req, res, next) => {
@@ -36,7 +40,11 @@ router.get("/name/:name", async (req, res, next) => {
     req.query.offset
   );
 
-  res.status(200).json(response);
+  res.status(200).json({
+    code: response.code,
+    status: response.status,
+    data: response.data[0],
+  });
 });
 
 router.get("/english_name/:name", async (req, res, next) => {
@@ -47,7 +55,11 @@ router.get("/english_name/:name", async (req, res, next) => {
     req.query.offset
   );
 
-  res.status(200).json(response);
+  res.status(200).json({
+    code: response.code,
+    status: response.status,
+    data: response.data[0],
+  });
 });
 
 router.get("/english_name_translation/:name", async (req, res, next) => {
@@ -58,7 +70,11 @@ router.get("/english_name_translation/:name", async (req, res, next) => {
     req.query.offset
   );
 
-  res.status(200).json(response);
+  res.status(200).json({
+    code: response.code,
+    status: response.status,
+    data: response.data[0],
+  });
 });
 
 router.get("/type/:type", async (req, res, next) => {

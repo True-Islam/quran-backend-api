@@ -237,7 +237,7 @@ ayah.numberInSurah = 1;
 ayah.juz = 1;
 ayah.manzil = 1;
 ayah.ruku = 1;
-ayah.hizbQurater = 1;
+ayah.hizbQuarter = 1;
 ayah.sajda = false;
 ayah.arabic = "arabic of ayah 1";
 

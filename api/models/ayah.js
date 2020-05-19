@@ -7,7 +7,7 @@ class Ayah {
     this.juz;
     this.manzil;
     this.ruku;
-    this.hizbQurater;
+    this.hizbQuarter;
     this.sajda;
     this.arabic;
   }
@@ -21,7 +21,7 @@ class Ayah {
     ayah.juz = data.juz;
     ayah.manzil = data.manzil;
     ayah.ruku = data.ruku;
-    ayah.hizbQurater = data.hizbQurater;
+    ayah.hizbQuarter = data.hizbQuarter;
     ayah.sajda = data.sajda;
     ayah.arabic = data.arabic;
 
@@ -36,7 +36,7 @@ class Ayah {
       juz: this.juz,
       manzil: this.manzil,
       ruku: this.ruku,
-      hizbQurater: this.hizbQurater,
+      hizbQuarter: this.hizbQuarter,
       sajda: this.sajda,
       arabic: this.arabic,
     };
