@@ -13,22 +13,895 @@ produces:
 schemes:
   - "https"
 paths:
-  "/v1/audio":
+  "/v1/audio/{audioId}":
     get:
+      tags:
+        - "Audio"
       description: "Get Audio by Id"
-      operationId: "audio"
+      operationId: "getAudioById"
+      parameters:
+        - in: path
+          name: audioId
+          type: string
+          required: true
+          description: String ID of Audio
       produces:
         - "application/json"
       responses:
         200:
-          description: "Echo"
+          description: "Successful operation to get Audio"
           schema:
-            $ref: "#/definitions/echoMessage"
+            $ref: "#/definitions/audio"
+  "/v1/audio/ayah/{ayahId}":
+    get:
+      tags:
+        - "Audio"
+      description: "Get Audio by Ayah Id"
+      operationId: "getAudioByAyahId"
+      parameters:
+        - in: path
+          name: ayahId
+          type: string
+          required: true
+          description: String ID of Ayah
+        - in: query
+          name: limit
+          type: integer
+          description: Limit the number of results
+        - in: query
+          name: offset
+          type: integer
+          description: Start getting result from specific offset usually for next page results
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Audio"
+          schema:
+            $ref: "#/definitions/audio"
+  "/v1/audio/edition/{editionId}":
+    get:
+      tags:
+        - "Audio"
+      description: "Get Audio by Edition Id"
+      operationId: "getAudioByEdition"
+      parameters:
+        - in: path
+          name: editionId
+          type: string
+          required: true
+          description: String ID of Edition
+        - in: query
+          name: limit
+          type: integer
+          description: Limit the number of results
+        - in: query
+          name: offset
+          type: integer
+          description: Start getting result from specific offset usually for next page results
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Audio"
+          schema:
+            $ref: "#/definitions/audio"
+  "/v1/audio/arabic/{ayahId}/{editionId}":
+    get:
+      tags:
+        - "Audio"
+      description: "Get Arabic Audio by Ayah Id and Edition Id"
+      operationId: "getArabicAudio"
+      parameters:
+        - in: path
+          name: ayahId
+          type: string
+          required: true
+          description: String ID of Ayah
+        - in: path
+          name: editionId
+          type: string
+          required: true
+          description: String ID of Edition
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Audio"
+          schema:
+            $ref: "#/definitions/audio"
+  "/v1/audio/translation/{ayahId}/{editionId}":
+    get:
+      tags:
+        - "Audio"
+      description: "Get Audio Translation by Ayah Id and Edition Id"
+      operationId: "getAudioTranslation"
+      parameters:
+        - in: path
+          name: ayahId
+          type: string
+          required: true
+          description: String ID of Ayah
+        - in: path
+          name: editionId
+          type: string
+          required: true
+          description: String ID of Edition
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Audio"
+          schema:
+            $ref: "#/definitions/audio"
+  "/v1/ayah/{ayahId}":
+    get:
+      tags:
+        - "Ayah"
+      description: "Get Ayah by Id"
+      operationId: "getAyahById"
+      parameters:
+        - in: path
+          name: ayahId
+          type: string
+          required: true
+          description: String ID of Ayah
+        - in: query
+          name: parts
+          type: string
+          description: Comma seperated additional parts possible value are Translation,Surah,Edition,Arabic_Audio,Translation_Audio,Image. You can set "All" if you want to get all parts.
+        - in: query
+          name: edition
+          type: string
+          description: String id of edition
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Ayah"
+          schema:
+            $ref: "#/definitions/ayah"
+  "/v1/ayah/surah/{surahId}":
+    get:
+      tags:
+        - "Ayah"
+      description: "Get Ayah by Surah Id"
+      operationId: "getAyahBySurahId"
+      parameters:
+        - in: path
+          name: surahId
+          type: string
+          required: true
+          description: String ID of Surah
+        - in: query
+          name: limit
+          type: integer
+          description: Limit the number of results
+        - in: query
+          name: offset
+          type: integer
+          description: Start getting result from specific offset usually for next page results
+        - in: query
+          name: parts
+          type: string
+          description: Comma seperated additional parts possible value are Translation,Surah,Edition,Arabic_Audio,Translation_Audio,Image. You can set "All" if you want to get all parts.
+        - in: query
+          name: edition
+          type: string
+          description: String id of edition
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Ayah"
+          schema:
+            $ref: "#/definitions/ayah"
+  "/v1/ayah/number/{number}":
+    get:
+      tags:
+        - "Ayah"
+      description: "Get Ayah by Surah number"
+      operationId: "getAyahByNumber"
+      parameters:
+        - in: path
+          name: number
+          type: integer
+          required: true
+          description: Number of surah
+        - in: query
+          name: parts
+          type: string
+          description: Comma seperated additional parts possible value are Translation,Surah,Edition,Arabic_Audio,Translation_Audio,Image. You can set "All" if you want to get all parts.
+        - in: query
+          name: edition
+          type: string
+          description: String id of edition
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Ayah"
+          schema:
+            $ref: "#/definitions/ayah"
+  "/v1/ayah/number_in_surah/{number}":
+    get:
+      tags:
+        - "Ayah"
+      description: "Get Ayah by Number if surah"
+      operationId: "getAyahByNumberInSurah"
+      parameters:
+        - in: path
+          name: number
+          type: integer
+          required: true
+          description: Number of surah
+        - in: query
+          name: parts
+          type: string
+          description: Comma seperated additional parts possible value are Translation,Surah,Edition,Arabic_Audio,Translation_Audio,Image. You can set "All" if you want to get all parts.
+        - in: query
+          name: edition
+          type: string
+          description: String id of edition
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Ayah"
+          schema:
+            $ref: "#/definitions/ayah"
+  "/v1/ayah/juz/{juz}":
+    get:
+      tags:
+        - "Ayah"
+      description: "Get Ayah by Juz"
+      operationId: "getAyahByJuz"
+      parameters:
+        - in: path
+          name: juz
+          type: integer
+          required: true
+          description: Number of juz
+        - in: query
+          name: limit
+          type: integer
+          description: Limit the number of results
+        - in: query
+          name: offset
+          type: integer
+          description: Start getting result from specific offset usually for next page results
+        - in: query
+          name: parts
+          type: string
+          description: Comma seperated additional parts possible value are Translation,Surah,Edition,Arabic_Audio,Translation_Audio,Image. You can set "All" if you want to get all parts.
+        - in: query
+          name: edition
+          type: string
+          description: String id of edition
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Ayah"
+          schema:
+            $ref: "#/definitions/ayah"
+  "/v1/ayah/manzil/{manzil}":
+    get:
+      tags:
+        - "Ayah"
+      description: "Get Ayah by manzil"
+      operationId: "getAyahByManzil"
+      parameters:
+        - in: path
+          name: manzil
+          type: integer
+          required: true
+          description: Number of manzil
+        - in: query
+          name: limit
+          type: integer
+          description: Limit the number of results
+        - in: query
+          name: offset
+          type: integer
+          description: Start getting result from specific offset usually for next page results
+        - in: query
+          name: parts
+          type: string
+          description: Comma seperated additional parts possible value are Translation,Surah,Edition,Arabic_Audio,Translation_Audio,Image. You can set "All" if you want to get all parts.
+        - in: query
+          name: edition
+          type: string
+          description: String id of edition
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Ayah"
+          schema:
+            $ref: "#/definitions/ayah"
+  "/v1/ayah/ruku/{ruku}":
+    get:
+      tags:
+        - "Ayah"
+      description: "Get Ayah by ruku number"
+      operationId: "getAyahByRuku"
+      parameters:
+        - in: path
+          name: ruku
+          type: integer
+          required: true
+          description: Number of ruku
+        - in: query
+          name: limit
+          type: integer
+          description: Limit the number of results
+        - in: query
+          name: offset
+          type: integer
+          description: Start getting result from specific offset usually for next page results
+        - in: query
+          name: parts
+          type: string
+          description: Comma seperated additional parts possible value are Translation,Surah,Edition,Arabic_Audio,Translation_Audio,Image. You can set "All" if you want to get all parts.
+        - in: query
+          name: edition
+          type: string
+          description: String id of edition
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Ayah"
+          schema:
+            $ref: "#/definitions/ayah"
+  "/v1/ayah/hizb_qurater/{hizbQuarter}":
+    get:
+      tags:
+        - "Ayah"
+      description: "Get Ayah by hizb quarter"
+      operationId: "getAyahByHizbQuarter"
+      parameters:
+        - in: path
+          name: hizbQuarter
+          type: integer
+          required: true
+          description: Number of hizbQuarter
+        - in: query
+          name: limit
+          type: integer
+          description: Limit the number of results
+        - in: query
+          name: offset
+          type: integer
+          description: Start getting result from specific offset usually for next page results
+        - in: query
+          name: parts
+          type: string
+          description: Comma seperated additional parts possible value are Translation,Surah,Edition,Arabic_Audio,Translation_Audio,Image. You can set "All" if you want to get all parts.
+        - in: query
+          name: edition
+          type: string
+          description: String id of edition
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Ayah"
+          schema:
+            $ref: "#/definitions/ayah"
+  "/v1/ayah/sajda/{sajda}":
+    get:
+      tags:
+        - "Ayah"
+      description: "Get Ayah by sajda"
+      operationId: "getAyahBySajda"
+      parameters:
+        - in: path
+          name: sajda
+          type: boolean
+          required: true
+          description: Is sajda Ayah or not
+        - in: query
+          name: limit
+          type: integer
+          description: Limit the number of results
+        - in: query
+          name: offset
+          type: integer
+          description: Start getting result from specific offset usually for next page results
+        - in: query
+          name: parts
+          type: string
+          description: Comma seperated additional parts possible value are Translation,Surah,Edition,Arabic_Audio,Translation_Audio,Image. You can set "All" if you want to get all parts.
+        - in: query
+          name: edition
+          type: string
+          description: String id of edition
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Ayah"
+          schema:
+            $ref: "#/definitions/ayah"
+  "/v1/edition/{editionId}":
+    get:
+      tags:
+        - "Edition"
+      description: "Get Edition by editionId"
+      operationId: "getAyahByEdition"
+      parameters:
+        - in: path
+          name: editionId
+          type: string
+          required: true
+          description: ID of the edition
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Edition"
+          schema:
+            $ref: "#/definitions/edition"
+  "/v1/edition/all":
+    get:
+      tags:
+        - "Edition"
+      description: "Get all Edition"
+      operationId: "getAllEditions"
+      parameters:
+        - in: query
+          name: limit
+          type: integer
+          description: Limit the number of results
+        - in: query
+          name: offset
+          type: integer
+          description: Start getting result from specific offset usually for next page results
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Edition"
+          schema:
+            $ref: "#/definitions/edition"
+  "/v1/edition/language/{language}":
+    get:
+      tags:
+        - "Edition"
+      description: "Get Edition by Language"
+      operationId: "getEditionByLanguage"
+      parameters:
+        - in: path
+          name: language
+          type: string
+          required: true
+          description: Langauge of edition
+        - in: query
+          name: limit
+          type: integer
+          description: Limit the number of results
+        - in: query
+          name: offset
+          type: integer
+          description: Start getting result from specific offset usually for next page results
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Edition"
+          schema:
+            $ref: "#/definitions/edition"
+  "/v1/edition/translator/{translator}":
+    get:
+      tags:
+        - "Edition"
+      description: "Get Edition by translator"
+      operationId: "getEditionByTranslator"
+      parameters:
+        - in: path
+          name: translator
+          type: string
+          required: true
+          description: Translator of edition
+        - in: query
+          name: limit
+          type: integer
+          description: Limit the number of results
+        - in: query
+          name: offset
+          type: integer
+          description: Start getting result from specific offset usually for next page results
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Edition"
+          schema:
+            $ref: "#/definitions/edition"
+  "/v1/edition/type/{type}":
+    get:
+      tags:
+        - "Edition"
+      description: "Get Edition by type"
+      operationId: "getEditionByType"
+      parameters:
+        - in: path
+          name: type
+          type: string
+          required: true
+          description: type of edition
+        - in: query
+          name: limit
+          type: integer
+          description: Limit the number of results
+        - in: query
+          name: offset
+          type: integer
+          description: Start getting result from specific offset usually for next page results
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Edition"
+          schema:
+            $ref: "#/definitions/edition"
+  "/v1/image/{ayahId}":
+    get:
+      tags:
+        - "Image"
+      description: "Get Image by Ayah ID"
+      operationId: "getImageByAyahId"
+      parameters:
+        - in: path
+          name: ayahId
+          type: string
+          required: true
+          description: String ID of ayah
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Image"
+          schema:
+            $ref: "#/definitions/image"
+  "/v1/surah/{surahId}":
+    get:
+      tags:
+        - "Surah"
+      description: "Get Surah by ID"
+      operationId: "getSurahById"
+      parameters:
+        - in: path
+          name: surahId
+          type: string
+          required: true
+          description: String ID of surah
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Surah"
+          schema:
+            $ref: "#/definitions/surah"
+  "/v1/surah/all":
+    get:
+      tags:
+        - "Surah"
+      description: "Get All surah"
+      operationId: "getAllSurah"
+      parameters:
+        - in: query
+          name: limit
+          type: integer
+          description: Limit the number of results
+        - in: query
+          name: offset
+          type: integer
+          description: Start getting result from specific offset usually for next page results
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Surah"
+          schema:
+            $ref: "#/definitions/surah"
+  "/v1/surah/number/{number}":
+    get:
+      tags:
+        - "Surah"
+      description: "Get Surah by number"
+      operationId: "getSurahByNumber"
+      parameters:
+        - in: path
+          name: number
+          type: integer
+          required: true
+          description: Surah number
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Surah"
+          schema:
+            $ref: "#/definitions/surah"
+  "/v1/surah/name/{name}":
+    get:
+      tags:
+        - "Surah"
+      description: "Get Surah by name"
+      operationId: "getSurahByName"
+      parameters:
+        - in: path
+          name: name
+          type: string
+          required: true
+          description: Surah name
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Surah"
+          schema:
+            $ref: "#/definitions/surah"
+  "/v1/surah/english_name/{englishName}":
+    get:
+      tags:
+        - "Surah"
+      description: "Get Surah by english_name"
+      operationId: "getSurahByEnglishName"
+      parameters:
+        - in: path
+          name: englishName
+          type: string
+          required: true
+          description: Surah English name
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Surah"
+          schema:
+            $ref: "#/definitions/surah"
+  "/v1/surah/english_name_translation/{englishNameTranslation}":
+    get:
+      tags:
+        - "Surah"
+      description: "Get Surah by English name translation"
+      operationId: "getSurahByEnglishNameTranslation"
+      parameters:
+        - in: path
+          name: englishNameTranslation
+          type: string
+          required: true
+          description: Surah english name translation
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Surah"
+          schema:
+            $ref: "#/definitions/surah"
+  "/v1/surah/type/{type}":
+    get:
+      tags:
+        - "Surah"
+      description: "Get Surah by Revelation Type, Possible values are Meccan or Medinan"
+      operationId: "getSurahByRevelationType"
+      parameters:
+        - in: path
+          name: type
+          type: string
+          required: true
+          description: Revelation Type
+          enum: [Meccan, Medinan]
+        - in: query
+          name: limit
+          type: integer
+          description: Limit the number of results
+        - in: query
+          name: offset
+          type: integer
+          description: Start getting result from specific offset usually for next page results
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Surah"
+          schema:
+            $ref: "#/definitions/surah"
+  "/v1/translation/{translationId}":
+    get:
+      tags:
+        - "Translation"
+      description: "Get Translation by translation ID"
+      operationId: "getTranslationById"
+      parameters:
+        - in: path
+          name: translationId
+          type: string
+          required: true
+          description: String ID of translation
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Translation"
+          schema:
+            $ref: "#/definitions/translation"
+  "/v1/translation/ayah/{ayahId}":
+    get:
+      tags:
+        - "Translation"
+      description: "Get Translation by ayahId"
+      operationId: "getTranslationAyahId"
+      parameters:
+        - in: path
+          name: ayahId
+          type: string
+          required: true
+          description: String ID of Ayah
+        - in: query
+          name: limit
+          type: integer
+          description: Limit the number of results
+        - in: query
+          name: offset
+          type: integer
+          description: Start getting result from specific offset usually for next page results
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Translation"
+          schema:
+            $ref: "#/definitions/translation"
+  "/v1/translation/edition/{editionId}":
+    get:
+      tags:
+        - "Translation"
+      description: "Get Translation by editionId"
+      operationId: "getTranslationEditionId"
+      parameters:
+        - in: path
+          name: editionId
+          type: string
+          required: true
+          description: String ID of edition
+        - in: query
+          name: limit
+          type: integer
+          description: Limit the number of results
+        - in: query
+          name: offset
+          type: integer
+          description: Start getting result from specific offset usually for next page results
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Translation"
+          schema:
+            $ref: "#/definitions/translation"
+  "/v1/translation/filter/{ayahId}/{editionId}":
+    get:
+      tags:
+        - "Translation"
+      description: "Filter Translation by ayahId and EditionId"
+      operationId: "filterTranslation"
+      parameters:
+        - in: path
+          name: ayahId
+          type: string
+          required: true
+          description: String ID of Ayah
+        - in: path
+          name: editionId
+          type: string
+          required: true
+          description: String ID of Edition
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successful operation to get Translation"
+          schema:
+            $ref: "#/definitions/translation"
+
 definitions:
-  echoMessage:
+  audio:
     type: "object"
     properties:
-      message:
-        type: "string"
+      id:
+        type: string
+      ayahId:
+        type: string
+      ayahNumber:
+        type: integer
+      editionId:
+        type: string
+      type:
+        type: string
+        description: Type can be Audio or Translation
+      link:
+        type: string
+        description: Link of the Audio file
+  ayah:
+    type: object
+    properties:
+      id:
+        type: string
+      surahId:
+        type: string
+      number:
+        type: integer
+      numberInSurah:
+        type: integer
+      juz:
+        type: integer
+      manzil:
+        type: integer
+      ruku:
+        type: integer
+      hizbQuarter:
+        type: integer
+      sajda:
+        type: boolean
+      arabic:
+        type: string
+  edition:
+    type: object
+    properties:
+      id:
+        type: string
+      language:
+        type: string
+      translator:
+        type: string
+      type:
+        type: string
+      format:
+        type: string
+      direction:
+        type: string
+  image:
+    type: object
+    properties:
+      ayahId:
+        type: string
+      link:
+        type: string
+  surah:
+    type: object
+    properties:
+      id:
+        type: string
+      number:
+        type: integer
+      name:
+        type: string
+      englishName:
+        type: string
+      englishNameTranslation:
+        type: string
+      numberOfAyahs:
+        type: integer
+      revelationType:
+        type: string
+  translation:
+    type: object
+    properties:
+      id:
+        type: string
+      ayahId:
+        type: string
+      ayahNumber:
+        type: integer
+      editionId:
+        type: string
+      text:
+        type: string
+
 # Does not require an API key.
 security: []

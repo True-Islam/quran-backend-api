@@ -20,9 +20,7 @@ router.get("/all", async (req, res, next) => {
 router.get("/number/:number", async (req, res, next) => {
   const response = await generateResponse(
     "number",
-    parseInt(req.params.number),
-    req.query.limit,
-    req.query.offset
+    parseInt(req.params.number)
   );
 
   res.status(200).json({

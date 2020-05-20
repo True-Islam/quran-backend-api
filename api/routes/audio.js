@@ -17,17 +17,6 @@ router.get("/ayah/:ayahId", async (req, res, next) => {
   res.status(200).json(response);
 });
 
-router.get("/ayah/:ayahId", async (req, res, next) => {
-  const response = await generateResponse(
-    "ayahId",
-    req.params.ayahId,
-    req.query.limit,
-    req.query.offset
-  );
-
-  res.status(200).json(response);
-});
-
 router.get("/edition/:editionId", async (req, res, next) => {
   const response = await generateResponse(
     "editionId",

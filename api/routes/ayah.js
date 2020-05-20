@@ -28,8 +28,8 @@ router.get("/number/:number", async (req, res, next) => {
   const response = await generateResponse(
     "number",
     parseInt(req.params.number),
-    req.query.limit,
-    req.query.offset,
+    null,
+    null,
     req.query.parts,
     req.query.edition
   );
@@ -45,8 +45,8 @@ router.get("/number_in_surah/:number", async (req, res, next) => {
   const response = await generateResponse(
     "numberInSurah",
     parseInt(req.params.number),
-    req.query.limit,
-    req.query.offset,
+    null,
+    null,
     req.query.parts,
     req.query.edition
   );
