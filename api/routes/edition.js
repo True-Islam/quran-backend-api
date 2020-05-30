@@ -28,10 +28,21 @@ router.get("/language/:language", async (req, res, next) => {
   res.status(200).json(response);
 });
 
-router.get("/translator/:translator", async (req, res, next) => {
+router.get("/language/:language", async (req, res, next) => {
   const response = await generateResponse(
-    "translator",
-    req.params.translator,
+    "language",
+    req.params.language,
+    req.query.limit,
+    req.query.offset
+  );
+
+  res.status(200).json(response);
+});
+
+router.get("/name/:name", async (req, res, next) => {
+  const response = await generateResponse(
+    "name",
+    req.params.name,
     req.query.limit,
     req.query.offset
   );

@@ -2,6 +2,7 @@ class Edition {
   constructor() {
     this.id;
     this.language;
+    this.name;
     this.translator;
     this.type;
     this.format;
@@ -11,6 +12,7 @@ class Edition {
   static fromJson(data, id = null) {
     const edition = new Edition();
     edition.id = id;
+    edition.name = data.name;
     edition.language = data.language;
     edition.translator = data.translator;
     edition.type = data.type;
@@ -23,6 +25,7 @@ class Edition {
   toJson(withId = false) {
     const jsonData = {
       language: this.language,
+      name: this.name,
       translator: this.translator,
       type: this.type,
       format: this.format,
